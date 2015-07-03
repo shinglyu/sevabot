@@ -5,6 +5,7 @@ Handler class for processing built-in commands and delegating messages.
 """
 from __future__ import absolute_import, division, unicode_literals
 
+import random
 import re
 import logging
 import shlex
@@ -83,8 +84,6 @@ class CommandHandler:
         command_args = words[1:]
 
         ### Gong Li special power! (will not execute normal command)
-        if command_name == "!gong":
-            return
 
         for word in words:
             gong_list = ["gong", "宮力", "宮博", "fish", "魚"]
@@ -96,6 +95,9 @@ class CommandHandler:
             sf_list = ["舊金山", "sf", "san francisco"]
             bj_list = ["北京", "beijing", "中國", "china"]
             taipei_list = ["台北", "taipei", "台灣", "taiwan"]
+            court_list = ["上訴", "法庭", "法律", "law"]
+            news_list = ["新聞", "news"]
+            yearend_list = ["尾牙", "year-end", "yearend"]
             for paris in paris_list:
                 if paris in word.lower():
                     command_name = "!gong"
@@ -112,6 +114,23 @@ class CommandHandler:
                 if tp in word.lower():
                     command_name = "!gong"
                     command_args.append("tp")
+            for court in court_list:
+                if court in word.lower():
+                    command_name = "!gong"
+                    command_args.append("court")
+            for news in news_list:
+                if news in word.lower():
+                    command_name = "!gong"
+                    command_args.append("news")
+            for yearend in yearend_list:
+                if yearend in word.lower():
+                    command_name = "!gong"
+                    command_args.append("yearend")
+
+            # Only 3% of possibility to trigger POWER OF GONG
+            if command_name == "!gong":
+                if random.randint(1, 100) < 97:
+                    return
         ### End of Gong Li special power!
 
         # Beyond this point we process script commands only
