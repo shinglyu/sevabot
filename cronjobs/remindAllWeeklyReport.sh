@@ -11,10 +11,6 @@ CHATS=(
 
 for CHAT in ${CHATS[@]} 
 do
-  $BASEDIR/send.sh $CHAT '.
-.  
-  ▶ ▶ ▶ 記得填 Weekly Report https://wiki.mozilla.org/FirefoxOS/DeviceQA#Weekly_Reports
-.  
-  '
+  $BASEDIR/send.sh $CHAT "$(python $BASEDIR/remindAllWeeklyReport.py)"
 done
 
